@@ -2,13 +2,13 @@
 %global module_name requests-toolbelt
 
 Name:           python-%{module_name}
-Version:        0.6.0
+Version:        0.8.0
 Release:        1%{?dist}
 Summary:        A utility belt for advanced users of python-requests
 
 License:        ASL 2.0
-URL:            https://toolbelt.readthedocs.org/
-Source0:        https://pypi.python.org/packages/source/r/%{module_name}/%{module_name}-%{version}.tar.gz
+URL:            https://github.com/requests/toolbelt
+Source0:        %{url}/archive/%{version}/toolbelt-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
@@ -34,7 +34,7 @@ belong in requests proper.
 %endif
 
 %prep
-%setup -q -n %{module_name}-%{version}
+%setup -q -n toolbelt-%{version}
 rm -rf *.egg-info
 
 %if 0%{?with_python3}
@@ -64,14 +64,12 @@ popd
 %{__python2} setup.py install --skip-build --root=%{buildroot}
 
 %files -n python-%{module_name}
-%doc PKG-INFO
 %license LICENSE
 %{python2_sitelib}/requests_toolbelt
 %{python2_sitelib}/requests_toolbelt-%{version}-py2.*.egg-info
 
 %if 0%{?with_python3}
 %files -n python3-%{module_name}
-%doc PKG-INFO
 %license LICENSE
 %{python3_sitelib}/requests_toolbelt
 %{python3_sitelib}/requests_toolbelt-%{version}-py3.*.egg-info
@@ -79,6 +77,9 @@ popd
 
 
 %changelog
+* Wed Apr 04 2018 Tristan Cacqueray <tdecacqu@redhat.com> - 0.8.0-1
+- update to 0.8.0 release
+
 * Thu Jan 28 2016 Parag Nemade <pnemade AT redhat DOT com> - 0.6.0-1
 - update to 0.6.0 release
 
